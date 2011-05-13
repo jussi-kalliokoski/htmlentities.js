@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../src/htmlentities.js"></script>
+		<script>
+var	input, output;
+
+function encode(){
+	output.value = htmlentities.encode(input.value);
+}
+
+function decode(){
+	output.value = htmlentities.decode(input.value);
+}
+
+window.onload = function(){
+	input = document.getElementById('input');
+	output = document.getElementById('output');
+}
+		</script>
+	</head>
+	<body>
+		<textarea id="input"></textarea>
+		<br />
+		<input type="button" onclick="encode()" value="Encode" />
+		<input type="button" onclick="decode()" value="Decode" />
+		<br />
+		<textarea id="output"></textarea>
+	</body>
+</html>
