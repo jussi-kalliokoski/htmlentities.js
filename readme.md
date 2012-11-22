@@ -1,12 +1,8 @@
 htmlentities.js
 ===============
 
-A minimal html entities decoder/encoder using DOM.
+A minimal html entities decoder/encoder using string replacement.  Should scrub an input string of any XSS attempts or other HTML constructs.
 
-Disclaimer
-----------
-
-You shouldn't use this "library" for anything real, this is made purely for demonstrational purposes. For reasons why using the approach may be harmful, see [this issue](https://github.com/jussi-kalliokoski/htmlentities.js/issues/1) and the article it links to.
 
 Usage
 -----
@@ -18,9 +14,6 @@ htmlentities.encode('<&>'); // returns '&lt;&amp;&gt;';
 
 //Decode string
 htmlentities.decode('&lt;&amp;&gt;'); // returns '<&>';
-
-//Also, htmlentities() is a shorthand for encode
-htmlentities === htmlentities.encode; // true
 
 ```
 
