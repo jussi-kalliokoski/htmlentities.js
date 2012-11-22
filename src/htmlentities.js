@@ -1,20 +1,33 @@
-var htmlentities = (function(document){
+(function(context){
+	var dict = {
+		"<":"&lt;",
+		"!":"&#033;",
+		"=":"&#061;",
+		'"':"&quot;",
+		"'":"&apos;",
+		"/":"&#047;",
+		">":"&gt;",
+		"&":"&amp;"
+	};
+	var reverse = {};	for(var p in dict)	reverse[dict[p]] = p;
+	
+	function encode(str) {
+		return str.replace(/[<!="'\/>&]/g,
+			function(char) {
+                    		return dict[char];
+                 	}
+		);
+	}
 
-function encode(str){
-	var div = document.createElement('div');
-	div.appendChild(document.createTextNode(str));
-	str = div.innerHTML;
-	div = null;
-	return str;
-}
+	function decode(str) {
+		return str.replace(/&(?:#\d+|[a-z]+);/g,
+				function(ent) {
+					return reverse[ent] || ent;
+				}
+		);
+	}
 
-encode.decode = function(str){
-	var div = document.createElement('div');
-	div.innerHTML = str;
-	str = div.innerText || div.textContent;
-	div = null;
-	return str;
-};
-return (encode.encode = encode);
+	context.encode = encode;
+	context.decode = decode;
 
-}(document));
+})(this);
